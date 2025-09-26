@@ -4,304 +4,291 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Lista de Chequeo UX Writing + Ley de Prägnanz</title>
+    <title>Lista de Chequeo UX Writing + Ley de Proximidad</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         :root {
-            --primary: #2c3e50;
-            --secondary: #3498db;
-            --accent: #e74c3c;
-            --light: #ecf0f1;
-            --dark: #2c3e50;
-            --success: #2ecc71;
-            --warning: #f39c12;
-            --danger: #e74c3c;
-            --gray: #95a5a6;
-            --card-shadow: 0 10px 20px rgba(0, 0, 0, 0.12);
-            --prägnanz: #9b59b6;
-        }
-        
-        * {
-            box-sizing: border-box;
-            margin: 0;
-            padding: 0;
-        }
-        
-        body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            line-height: 1.6;
-            color: var(--dark);
-            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
-            padding: 20px;
-            min-height: 100vh;
-        }
-        
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
-            background: white;
-            border-radius: 15px;
-            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.15);
-            overflow: hidden;
-        }
-        
-        header {
-            background: linear-gradient(120deg, var(--primary) 0%, #1a2530 100%);
-            color: white;
-            padding: 35px;
-            text-align: center;
-            position: relative;
-        }
-        
-        h1 {
-            font-size: 2.8rem;
-            margin-bottom: 15px;
-            font-weight: 700;
-        }
-        
-        .description {
-            font-size: 1.2rem;
-            max-width: 800px;
-            margin: 0 auto;
-            color: var(--light);
-            font-weight: 300;
-        }
-        
-        .website-info {
-            margin-top: 15px;
-            background: rgba(255, 255, 255, 0.1);
-            padding: 10px;
-            border-radius: 8px;
-            display: inline-block;
-        }
-        
-        .tabs {
-            display: flex;
-            background: #f8f9fa;
-            border-bottom: 1px solid #ddd;
-        }
-        
-        .tab {
-            padding: 15px 25px;
-            cursor: pointer;
-            font-weight: 600;
-            transition: all 0.3s;
-            text-align: center;
-            flex: 1;
-        }
-        
-        .tab.active {
-            background: white;
-            border-bottom: 3px solid var(--secondary);
-        }
-        
-        .tab:hover {
-            background: #e9ecef;
-        }
-        
-        .tab-content {
-            display: none;
-            padding: 30px;
-        }
-        
-        .tab-content.active {
-            display: block;
-        }
-        
-        .checklist-container {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
-            gap: 25px;
-        }
-        
-        .category {
-            background: var(--light);
-            border-radius: 12px;
-            padding: 25px;
-            box-shadow: var(--card-shadow);
-            transition: transform 0.3s;
-        }
-        
-        .category:hover {
-            transform: translateY(-5px);
-        }
-        
-        .category h2 {
-            color: var(--primary);
-            margin-bottom: 20px;
-            padding-bottom: 12px;
-            border-bottom: 3px solid var(--secondary);
-            display: flex;
-            align-items: center;
-            gap: 10px;
-        }
-        
-        .category.prägnanz h2 {
-            border-bottom: 3px solid var(--prägnanz);
-        }
-        
-        .category h2 i {
-            color: var(--secondary);
-        }
-        
-        .category.prägnanz h2 i {
-            color: var(--prägnanz);
-        }
-        
-        .check-item {
-            display: flex;
-            align-items: flex-start;
-            margin-bottom: 18px;
-            padding: 15px;
-            border-radius: 8px;
-            background: white;
-            transition: all 0.3s;
-            box-shadow: 0 3px 8px rgba(0, 0, 0, 0.05);
-        }
-        
-        .check-item:hover {
-            background: #f8f9fa;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
-        }
-        
-        .check-item input[type="checkbox"] {
-            margin-right: 18px;
-            margin-top: 5px;
-            transform: scale(1.4);
-            cursor: pointer;
-        }
-        
-        .check-item label {
-            flex: 1;
-            font-weight: 500;
-            cursor: pointer;
-            font-size: 1.05rem;
-        }
-        
-        .item-score {
-            background: var(--secondary);
-            color: white;
-            padding: 5px 10px;
-            border-radius: 20px;
-            font-size: 0.9rem;
-            font-weight: bold;
-            margin-left: 10px;
-        }
-        
-        .category.prägnanz .item-score {
-            background: var(--prägnanz);
-        }
-        
-        .notes {
-            margin-top: 8px;
-            font-size: 0.95rem;
-            color: var(--gray);
-            font-style: italic;
-            padding-left: 40px;
-        }
-        
-        .status {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-top: 20px;
-            padding: 25px;
-            background: var(--light);
-            border-top: 1px solid #ddd;
-        }
-        
-        .progress {
-            flex: 1;
-        }
-        
-        .progress-text {
-            display: flex;
-            justify-content: space-between;
-            margin-bottom: 10px;
-        }
-        
-        .progress-bar {
-            height: 25px;
-            background: #e0e0e0;
-            border-radius: 12px;
-            overflow: hidden;
-            margin-top: 10px;
-            box-shadow: inset 0 2px 5px rgba(0, 0, 0, 0.1);
-        }
-        
-        .progress-fill {
-            height: 100%;
-            background: linear-gradient(90deg, var(--success) 0%, #27ae60 100%);
-            border-radius: 12px;
-            width: 0%;
-            transition: width 0.7s ease;
-            display: flex;
-            align-items: center;
-            justify-content: flex-end;
-            padding-right: 15px;
-            color: white;
-            font-weight: bold;
-            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3);
-        }
-        
-        .score-display {
-            background: white;
-            padding: 15px;
-            border-radius: 12px;
-            text-align: center;
-            box-shadow: var(--card-shadow);
-            margin-left: 20px;
-            min-width: 150px;
-        }
-        
-        .score-value {
-            font-size: 2.5rem;
-            font-weight: 800;
-            color: var(--primary);
-        }
-        
-        .score-label {
-            font-size: 1rem;
-            color: var(--gray);
-        }
-        
-        .actions {
-            display: flex;
-            gap: 15px;
-        }
-        
-        button {
-            padding: 12px 25px;
-            border: none;
-            border-radius: 8px;
-            cursor: pointer;
-            font-weight: 600;
-            transition: all 0.3s;
-            display: flex;
-            align-items: center;
-            gap: 8px;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-        }
-        
-        .btn-save {
-            background: var(--secondary);
-            color: white;
-        }
-        
-        .btn-reset {
-            background: var(--gray);
-            color: white;
-        }
-        
-        .btn-save:hover {
-            background: #2980b9;
-            transform: translateY(-2px);
-        }
-        
-        .btn-reset:hover {
-            background: #7f8c8d;
-            transform: translateY(-2px);
-        }
+    --primary: #1b2a49;       /* Azul oscuro elegante */
+    --secondary: #20c997;     /* Verde teal */
+    --accent: #ff6b6b;        /* Coral */
+    --light: #fdfdfd;         /* Fondo claro */
+    --dark: #1b2a49;          /* Texto oscuro */
+    --success: #38b000;       /* Verde éxito */
+    --warning: #ffba08;       /* Amarillo cálido */
+    --danger: #e5383b;        /* Rojo alerta */
+    --gray: #6c757d;          /* Gris neutro */
+    --card-shadow: 0 12px 25px rgba(0, 0, 0, 0.15);
+    --prägnanz: #9d4edd;      /* Púrpura vibrante */
+}
+
+/* ====== RESET Y BASE ====== */
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    line-height: 1.7;
+    color: var(--dark);
+    background: linear-gradient(135deg, #f8f9fa 0%, #dee2e6 100%);
+    padding: 30px;
+    min-height: 100vh;
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    background: white;
+    border-radius: 18px;
+    box-shadow: 0 20px 35px rgba(0, 0, 0, 0.12);
+    overflow: hidden;
+}
+
+/* ====== HEADER ====== */
+header {
+    background: linear-gradient(120deg, var(--primary) 0%, var(--secondary) 100%);
+    color: white;
+    padding: 45px;
+    text-align: center;
+}
+
+h1 {
+    font-size: 3.2rem;
+    margin-bottom: 18px;
+    font-weight: 800;
+    letter-spacing: -1px;
+}
+
+.description {
+    font-size: 1.3rem;
+    max-width: 850px;
+    margin: 0 auto;
+    color: #f1f3f5;
+}
+
+.website-info {
+    margin-top: 18px;
+    background: rgba(255, 255, 255, 0.15);
+    padding: 12px 18px;
+    border-radius: 10px;
+    display: inline-block;
+}
+
+/* ====== TABS ====== */
+.tabs {
+    display: flex;
+    background: #f8f9fa;
+    border-bottom: 2px solid #ddd;
+}
+
+.tab {
+    padding: 18px 28px;
+    cursor: pointer;
+    font-weight: 700;
+    transition: all 0.3s;
+    text-align: center;
+    flex: 1;
+    font-size: 1.05rem;
+}
+
+.tab.active {
+    background: white;
+    border-bottom: 4px solid var(--secondary);
+    color: var(--secondary);
+}
+
+.tab:hover {
+    background: #e9ecef;
+}
+
+/* ====== CATEGORÍAS ====== */
+.checklist-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(360px, 1fr));
+    gap: 28px;
+}
+
+.category {
+    background: var(--light);
+    border-radius: 14px;
+    padding: 28px;
+    box-shadow: var(--card-shadow);
+    transition: transform 0.3s;
+}
+
+.category:hover {
+    transform: translateY(-6px);
+}
+
+.category h2 {
+    color: var(--primary);
+    margin-bottom: 22px;
+    padding-bottom: 14px;
+    border-bottom: 3px solid var(--secondary);
+    font-size: 1.4rem;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.category.prägnanz h2 {
+    border-bottom: 3px solid var(--prägnanz);
+}
+
+.category h2 i {
+    color: var(--secondary);
+    font-size: 1.3rem;
+}
+
+.category.prägnanz h2 i {
+    color: var(--prägnanz);
+}
+
+/* ====== CHECK ITEMS ====== */
+.check-item {
+    display: flex;
+    align-items: flex-start;
+    margin-bottom: 20px;
+    padding: 16px;
+    border-radius: 10px;
+    background: white;
+    transition: all 0.3s;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+}
+
+.check-item:hover {
+    background: #f1f3f5;
+    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.1);
+}
+
+.check-item input[type="checkbox"] {
+    margin-right: 20px;
+    margin-top: 6px;
+    transform: scale(1.6);
+    cursor: pointer;
+}
+
+.check-item label {
+    flex: 1;
+    font-weight: 500;
+    cursor: pointer;
+    font-size: 1.1rem;
+}
+
+.item-score {
+    background: var(--secondary);
+    color: white;
+    padding: 6px 12px;
+    border-radius: 20px;
+    font-size: 0.95rem;
+    font-weight: bold;
+    margin-left: 12px;
+}
+
+.category.prägnanz .item-score {
+    background: var(--prägnanz);
+}
+
+.notes {
+    margin-top: 8px;
+    font-size: 0.95rem;
+    color: var(--gray);
+    font-style: italic;
+    padding-left: 44px;
+}
+
+/* ====== PROGRESO Y RESULTADOS ====== */
+.status {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 25px;
+    padding: 28px;
+    background: var(--light);
+    border-top: 2px solid #ddd;
+}
+
+.progress-bar {
+    height: 26px;
+    background: #e0e0e0;
+    border-radius: 14px;
+    overflow: hidden;
+    margin-top: 12px;
+}
+
+.progress-fill {
+    height: 100%;
+    background: linear-gradient(90deg, var(--accent) 0%, var(--secondary) 100%);
+    border-radius: 14px;
+    width: 0%;
+    transition: width 0.7s ease;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    padding-right: 16px;
+    color: white;
+    font-weight: bold;
+}
+
+/* ====== SCORE DISPLAY ====== */
+.score-display {
+    background: white;
+    padding: 18px;
+    border-radius: 14px;
+    text-align: center;
+    box-shadow: var(--card-shadow);
+    margin-left: 22px;
+    min-width: 160px;
+}
+
+.score-value {
+    font-size: 2.8rem;
+    font-weight: 800;
+    color: var(--primary);
+}
+
+.score-label {
+    font-size: 1rem;
+    color: var(--gray);
+}
+
+/* ====== BOTONES ====== */
+button {
+    padding: 14px 28px;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    font-weight: 700;
+    transition: all 0.3s;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 1rem;
+    box-shadow: 0 5px 12px rgba(0, 0, 0, 0.1);
+}
+
+.btn-save {
+    background: var(--secondary);
+    color: white;
+}
+
+.btn-reset {
+    background: var(--gray);
+    color: white;
+}
+
+.btn-save:hover {
+    background: #15967d;
+    transform: translateY(-2px);
+}
+
+.btn-reset:hover {
+    background: #5c636a;
+    transform: translateY(-2px);
+}
+
         
         .principles-info {
             background: #f8f9fa;
@@ -365,8 +352,8 @@
 <body>
     <div class="container">
         <header>
-            <h1><i class="fas fa-check-double"></i> Lista de Chequeo UX Writing + Prägnanz</h1>
-            <p class="description">Evaluación de componentes de UX Writing y principios de la Ley de Prägnanz</p>
+            <h1><i class="fas fa-check-double"></i> Lista de Chequeo UX Writing + Proximidad</h1>
+            <p class="description">Evaluación de componentes de UX Writing y principios de la Ley de Proximidad</p>
             <div class="website-info">
                 <i class="fas fa-globe"></i> https://mac-center.com/
             </div>
@@ -374,7 +361,7 @@
         
         <div class="tabs">
             <div class="tab active" data-tab="ux-writing">UX Writing</div>
-            <div class="tab" data-tab="praganz">Ley de Prägnanz</div>
+            <div class="tab" data-tab="praganz">Ley de Proximidad</div>
             <div class="tab" data-tab="results">Resultados</div>
         </div>
         
@@ -621,7 +608,7 @@
                     
                     <div class="score-display" style="min-width: 200px;">
                         <div class="score-value" id="p-score">0</div>
-                        <div class="score-label">PUNTOS DE PRÄGNANZ</div>
+                        <div class="score-label">PUNTOS DE PROXIMIDAD</div>
                     </div>
                     
                     <div class="score-display" style="min-width: 200px;">
